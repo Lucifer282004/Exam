@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Code</title>
+    <style>
+        body{
+            background-color: rgb(46, 46, 46);
+        }
+        h1{
+            color: white;
+        }
+        .code-box {
+            width: 100%;
+            height: 700px;
+            font-family: monospace;
+            font-size: 14px;
+            background-color: black
+    ;
+            padding: 10px;
+            color: white;
+            border: 1px solid #000000;
+            resize: none;
+        }
+        button {
+            background-color: rgb(4, 200, 4);
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 20px;
+            cursor: pointer;
+
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bit</h1>
+    <button onclick="copyCode()">Copy Code</button>
+    <textarea id="codeBox" class="code-box" readonly>
+    def byte_stuffing(data):
+    FLAG = '7E'    # Start/end marker
+    ESCAPE = '7D'  # Escape marker
+    result = [FLAG]  # Begin with the FLAG
+
+    for byte in data:
+        if byte in [FLAG, ESCAPE]:  # If byte is special
+            result.append(ESCAPE)  # Add ESCAPE first
+            result.append(hex(int(byte, 16) ^ 0x20)[2:].upper())  # Modify byte
+        else:
+            result.append(byte)  # Just add the normal byte
+
+    result.append(FLAG)  # End with the FLAG
+    return result
+
+
+# Example usage
+data = ['12', '7E', '45', '7D', '5A']
+print("Original Data:", data)
+print("After Byte Stuffing:", byte_stuffing(data))
+    </textarea>
+    <br>
+    
+
+    <script>
+        function copyCode() {
+            var codeBox = document.getElementById("codeBox");
+            codeBox.select();
+            codeBox.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Code copied to clipboard!");
+        }
+    </script>
+
+</body>
+</html>
